@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+Atia & Tiger Technology 2019.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"/>
+<head>
+    <th:block th:replace="fragments/head-block"></th:block>
+</head>
+<body>
+    <div class="container-fluid">
+        <th:block th:replace="fragments/navbar-block"></th:block>
+        <th:block th:replace="fragments/error-block"></th:block>
+        <th:block th:replace="fragments/head-admin-block"></th:block>
+        <main class="mt-3">
+            <hr class="hr-2 w-75"/>
+            <div class = "container-fluid my-heading-container rounded mx-auto w-75">
+                <h1>Admin View - Edit User Authorities</h1>
+            </div>
+            <hr class="hr-2 w-75"/>
+            <form class="mx-auto w-50" th:object="${userModel}" th:action="@{/admin/users/edit(id=${userModel.id})}" method="post">
+                <div class="control-group w-50 mx-auto">
+                    <label class="control-label h3 mb-2" for="userName">User name</label>
+                    <div class="controls">
+                        <p th:text="*{name}" name="userName" class="form-control"/>
+                    </div>
+                </div>
+
+                <br/>
+                <div class="control-group w-50 mx-auto">
+                    <label class="control-label h3 mb-2" for="userEmail">User email</label>
+                    <div class="controls">
+                        <p th:text="*{domainEmail}" name="userEmail" class="form-control"/>
+                    </div>
+                </div>
+                <br/>             
+
+                <hr class="hr-2 w-75"/>
+                <div class = "container-fluid my-secondary-heading-container rounded mx-auto w-75">
+                    <h2>User Authorities</h2>
+                </div>
+                <hr class="hr-2 w-75"/>
+
+                <!-- DataTables Example -->
+
+                <div class="card mx-auto w-100 justify-content-md-center">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i>
+                        User Authorities
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="userAuthorities" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Authority</th>
+                                        <th>Add/Remove authority</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Authority</th>
+                                        <th>Add/Remove authority</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <th:block th:each="authority, rowStat : *{allAuthorities}">
+                                        <tr th:if="${authority.authority} != 'ROOT'">
+                                            <td th:text="${authority.authority}" ></td>
+                                            <td>
+                                                <input class="form-control" type="checkbox" th:field="*{allAuthorities[__${rowStat.index}__].flag}"/>
+                                                <input class="form-control" type="hidden" th:field="*{allAuthorities[__${rowStat.index}__].id}"/>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr-2"/>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-lg btn-primary btn-block">Edit Authorities</button>
+                        </div>
+                    </div>
+                    <hr class="hr-2"/>
+            </form>
+            <hr class="hr-2"/>
+        </main>
+    </div>        
+
+
+    <div class="text-center mt-3">
+        <h4 class="text-info text-center"><a th:href="@{/admin/users/details(id=${userModel.id})}">Go to User Details</a></h4>
+        <h4 class="text-info text-center"><a th:href="@{/admin/users/all}">Back to All Users</a></h4>
+        <h4 class="text-info text-center"><a th:href="@{/home}">Go to Home Page</a></h4>
+    </div> 
+    <hr class="hr-2"/>
+    <th:block th:replace="fragments/footer-block"></th:block>
+    <th:block th:replace="fragments/scripts-block"></th:block>
+    <th:block th:replace="fragments/scripts-admin-block"></th:block>
+    <script>
+        $(document).ready(function () {
+            $('#userAuthorities').DataTable();
+        });
+    </script>
+</div>
+</body>
+</html>
+

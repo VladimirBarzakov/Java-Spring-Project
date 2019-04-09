@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"/>
+<th:block th:fragment="navbar-block">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">Atia & Tiger Tech Shop</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">Home</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('SELLER')" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Seller panel
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                            <a class="dropdown-item" th:href = "@{/seller/items/create}">Create item</a>
+                            <a class="dropdown-item" th:href = "@{/seller/items/all}">All my items</a>
+                            <a class="dropdown-item" th:href = "@{/seller/auctions/create}">Create auction</a>
+                            <a class="dropdown-item" th:href = "@{/seller/auctions/all}">All my auctions</a>
+                            <a class="dropdown-item" th:href = "@{/archive/all}">My Archive</a>
+                        </div>
+                    </li>
+                    <li sec:authorize="hasAuthority('BUYER')" class="nav-item dropdown">
+                        <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Buyer Panel
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                            <a class="dropdown-item" th:href = "@{/buyer/auctions/all}">View active auctions</a>
+                            <a class="dropdown-item" th:href = "@{/buyer/winning/auctions}">View my wined auctions</a>
+                            <a class="dropdown-item" th:href = "@{/buyer/bids/all}">View placed bids</a>
+                        </div>
+                    </li>
+                    <li sec:authorize="hasAuthority('ADMIN')" class="nav-item dropdown">
+                        <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin Panel
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                            <a class="dropdown-item" th:href = "@{/admin/users/all}">View all users</a>
+                            <a class="dropdown-item" th:href = "@{/admin/items/all}">View all items</a>
+                            <a class="dropdown-item" th:href = "@{/admin/auctions/all}">View all auctions</a>
+                            <a class="dropdown-item" th:href = "@{/admin/bids/all}">View all bids</a>
+                            <a class="dropdown-item" th:href = "@{/archive/admin/all}">All Archive</a>
+                        </div>
+                    </li>
+                    <th:block sec:authorize="isAnonymous()">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{users/register}">Register</a>
+                        </li>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <form action="/logout"  method="post">
+                            <div th:insert="fragments/csrf-block.html"/>
+                            <button class="btn btn-primary" type="submit">Logout</button>
+                        </form>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</th:block>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+Atia & Tiger Technology 2019.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <th:block th:replace="fragments/head-block"></th:block>
+        <th:block th:replace="fragments/head-admin-block"></th:block>
+    </head>
+
+    <body id="page-top">
+        <th:block th:replace="fragments/navbar-block"></th:block>
+
+
+        <div id="wrapper">
+
+            <div id="content-wrapper">
+
+                <div class="container-fluid">
+                    <hr class="hr-2 w-50"/>
+                    <div class = "container-fluid my-heading-container rounded mx-auto w-50">
+                        <h1>Admin View - Delete item</h1>
+                    </div>
+                    <hr class="hr-2 w-50"/>
+                    <form class="mx-auto w-50" th:action="@{/admin/items/delete(id=${deleteItemViewModel.id})}" th:object="${deleteItemViewModel}" method="post">
+                        <div class="control-group">
+                            <label class="control-label h3 mb-2" for="itemName">Item Name</label>
+                            <div class="controls">
+                                <input type="text" th:field="*{name}" name="itemName" placeholder="Item Name..." class="form-control" disabled="true"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="control-group">
+                            <label class="control-label h3 mb-2" for="quantity">Item Quantity</label>
+                            <div class="controls">
+                                <input type="number" step="1" th:field="*{quantity}" name="quantity" placeholder="Item Quantity..." class="form-control" disabled="true"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="control-group">
+                            <label class="control-label h3 mb-2" for="ititialPrice">Asking Price BGN</label>
+                            <div class="controls">
+                                <input type="number" step="0.01" th:field="*{initialPrice}" name="ititialPrice" placeholder="No initial price" class="form-control" disabled="true"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="control-group">
+                            <label class="control-label h3 mb-2" for="description">Item description</label>
+                            <div class="controls">
+                                <textarea th:field="*{description}" name="description" placeholder="Item Description..." class="form-control" style="resize: none;" cols="50" rows="7" disabled="true"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="control-group">
+                            <label class="control-label h3 mb-2" for="location">Item location</label>
+                            <div class="controls">
+                                <textarea th:field="*{location}" name="location" placeholder="Item Location..." class="form-control" style="resize: none;" cols="50" rows="3" disabled="true"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button class="btn btn-lg btn-block btn-danger">Delete Item</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <hr class="w-50"/>
+                    <div class = "container-fluid  rounded mx-auto w-50">
+                        <h2>Item's auctions</h2>
+                    </div>
+                    <hr class="w-50"/>
+
+                    <!-- DataTables Example -->
+                    <div class="card mx-auto w-75 justify-content-md-center">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            Item's auctions
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Auction title</th>
+                                            <th>Item Quantity Offered</th>
+                                            <th>Asking Auction price BGN</th>
+                                            <th>Auction starting date</th>
+                                            <th>Auction expiring date</th>
+                                            <th>Auction status</th>
+                                            <th>Go to Auction</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Auction title</th>
+                                            <th>Item Quantity Offered</th>
+                                            <th>Asking Auction price BGN</th>
+                                            <th>Auction starting date</th>
+                                            <th>Auction expiring date</th>
+                                            <th>Auction status</th>
+                                            <th>Go to Auction</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <th:block th:each="aucItem :${deleteItemViewModel.aucItems}">
+                                            <tr>
+                                                <td th:text="${aucItem.auctionTitle}"/>
+                                                <td th:text="${aucItem.quantity}"/>
+                                                <td th:text="${aucItem.auctionInitialPrice} == null ? 'No initial price' : ${aucItem.auctionInitialPrice}"/>
+                                                <td th:text="${#dates.format(aucItem.auctionDateStarted, 'dd/MM/yyyy-HH:mm')}"/>
+                                                <td th:text="${#dates.format(aucItem.auctionDateExpired, 'dd/MM/yyyy-HH:mm')}"/>
+                                                <td th:text="${aucItem.auctionStatus}"/>
+                                                <td><a th:href="@{/admin/auctions/details(id=${aucItem.auctionId})}">Go to Auction</a></td>
+                                            </tr>
+                                        </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <h4 class="text-info text-center"><a th:href="@{/admin/items/details(id=${deleteItemViewModel.id})}">Go to Item Details</a></h4>
+                        <h4 class="text-info text-center"><a th:href="@{/admin/items/all}">Back to All Items</a></h4>
+                        <h4 class="text-info text-center"><a th:href="@{/home}">Go to Home Page</a></h4>
+                    </div> 
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- Bootstrap core JavaScript-->
+        <th:block th:replace="fragments/footer-block"></th:block>
+        <th:block th:replace="fragments/scripts-block"></th:block>
+        <th:block th:replace="fragments/scripts-admin-block"></th:block>
+        <script>
+            $(document).ready(function () {
+                $('#dataTable').DataTable();
+            });
+        </script>
+    </body>
+</html>

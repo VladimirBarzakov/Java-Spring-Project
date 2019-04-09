@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <th:block th:replace="fragments/head-block"></th:block>
+        <link rel="stylesheet" th:href="@{/css/major-error-page.css}" type="text/css"/>
+        
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <th:block th:replace="fragments/navbar-block"></th:block>
+        <div th:insert="fragments/csrf-block.html"/>
+        
+        <div>
+            <h1 class="text-center text-dark">Something went wrong! Reason:</h1>
+            <hr/>
+            <h4 class="text-center text-danger" th:if="${errormessage}!=null" th:text="${errormessage}"/>
+            <h3 class="text-center text-dark" th:if="${errormessage}!=null">Also</h3>
+        </div>
+
+        <!-- Page Content -->
+        <p class="center">Space Invadors destroyed this page! Take revenge on them!
+            <br/> Use <span class="label label-danger">Space</span> to shoot and <span class="label label-danger">←</span>&#160;<span class="label label-danger">→</span> to move!&#160;&#160;&#160;<button class="btn btn-default btn-xs" id="restart">Restart</button></p>
+
+        <canvas id="space-invaders"/>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <th:block th:replace="fragments/footer-block"></th:block>
+
+        <!-- Bootstrap core JavaScript -->
+        <th:block th:replace="fragments/scripts-block"></th:block>
+        <script type="text/javascript" th:src="@{/js/major-error-page.js}"></script>
+
+    </body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+Atia & Tiger Technology 2019.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <th:block th:replace="fragments/head-block"></th:block>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <th:block th:replace="fragments/navbar-block"></th:block>
+            <th:block th:replace="fragments/error-block"></th:block>
+
+            <main class="mt-3">
+                <hr class = "hr-2"/>
+                <div class = "container-fluid my-heading-container rounded mx-auto w-50">
+                    <h1>Register User</h1>
+                </div>
+                <hr class = "hr-2"/>
+                <form class="mx-auto w-25" th:action="@{/users/register}" th:object="${registerUserBindingModel}" method="post">
+                    <div class="form-group">
+                        <label for="username" >Username</label>
+                        <input type="text" th:field="*{name}" name="username" placeholder="Username..." class="form-control"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="domain-email" >User email</label>
+                        <input type="email" th:field="*{domainEmail}" name="domain-email" placeholder="email@atia.com" class="form-control"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('domainEmail')}" th:errors="*{domainEmail}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" >Password</label>
+                        <input type="password" th:field="*{testPassword}" name="password" placeholder="Password...." class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmTestPassword" >Confirm Password</label>
+                        <input type="password" th:field="*{confirmTestPassword}" name="confirmTestPassword" placeholder="Confirm password..." class="form-control"/>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="remember" id="remember"/>
+                        <label class="custom-control-label" for="remember">Remember me</label>
+                    </div>
+                    <hr class="bg-exodia hr-2"/>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-lg btn-primary btn-block">Register</button>
+                        </div>
+                    </div>
+                </form>
+                <hr class="hr-2"/>
+            </main>
+            <th:block th:replace="fragments/footer-block"></th:block>
+            <!-- Bootstrap core JavaScript -->
+            <th:block th:replace="fragments/scripts-block"></th:block>
+        </div>
+    </body>
+</html>
+

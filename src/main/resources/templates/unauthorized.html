@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <th:block th:replace="fragments/head-block"></th:block>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <th:block th:replace="fragments/navbar-block"></th:block>
+        <div th:insert="fragments/csrf-block.html"/>
+
+        <!-- Page Content -->
+        <div class="container-fluid mx-auto">
+            <h1 class="my-4 font-italic mx-auto text-center">You are not authorized to use that resource!</h1>
+            <hr class="w-50"/>
+            <div class="text-center">
+                <img class="rounded" th:src="@{/images/unauthorized/you-shall-not-pass.jpg}" alt=""/>
+            </div>
+            <hr  class="w-50"/>
+        </div>
+
+        <!-- Footer -->
+        <th:block th:replace="fragments/footer-block"></th:block>
+
+        <!-- Bootstrap core JavaScript -->
+        <th:block th:replace="fragments/scripts-block"></th:block>
+
+    </body>
+
+</html>

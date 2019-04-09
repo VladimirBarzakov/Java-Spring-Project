@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+Atia & Tiger Technology 2019.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <th:block th:replace="fragments/head-block"></th:block>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <th:block th:replace="fragments/navbar-block"></th:block>
+            <th:block th:replace="fragments/error-block"></th:block>
+            <hr class="my-3"/>
+            <!--CONTENT BEGINNING-->
+            <main class="mt-3">
+                <hr class="hr-2 w-50"/>
+                <div class = "container-fluid my-heading-container rounded mx-auto w-50">
+                    <h1>Admin View - Edit Item</h1>
+                </div>
+                <hr class="hr-2 w-50"/>
+                <form class="mx-auto w-50" th:action="@{/admin/items/edit(id=${editItemBindingModel.id})}" th:object="${editItemBindingModel}" method="post">
+                    <div class="control-group">
+                        <label class="control-label h3 mb-2" for="itemName">Item Name</label>
+                        <div class="controls">
+                            <input type="text" th:field="*{name}" name="itemName" placeholder="Item Name..." class="form-control"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="control-group">
+                        <label class="control-label h3 mb-2" for="quantity">Item Quantity</label>
+                        <div class="controls">
+                            <input type="number" step="1" th:field="*{quantity}" name="quantity" placeholder="Item Quantity..." class="form-control"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="control-group">
+                        <label class="control-label h3 mb-2" for="ititialPrice">Asking Price BGN</label>
+                        <div class="controls">
+                            <input type="number" step="0.01" th:field="*{initialPrice}" name="ititialPrice" placeholder="Initial Price..." class="form-control"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('initialPrice')}" th:errors="*{initialPrice}"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="control-group">
+                        <label class="control-label h3 mb-2" for="description">Item description</label>
+                        <div class="controls">
+                            <textarea th:field="*{description}" name="description" placeholder="Item Description..." class="form-control" style="resize: true;" cols="50" rows="10"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="control-group">
+                        <label class="control-label h3 mb-2" for="location">Item location</label>
+                        <div class="controls">
+                            <textarea th:field="*{location}" name="location" placeholder="Item Location..." class="form-control" style="resize: true;" cols="50" rows="3" />
+                            <p class="text-danger" th:if="${#fields.hasErrors('location')}" th:errors="*{location}"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-lg btn-primary btn-block">Edit Item</button>
+                        </div>
+                    </div>
+                </form>
+                <hr class="hr-2 w-50"/>
+                <div class = "mx-auto w-50">
+                    <a class="btn btn-lg btn-info btn-block" th:href="@{|/admin/items/gallery/edit/${editItemBindingModel.id}|}">Edit Item's gallery</a>
+                </div>
+                <hr class="hr-2 w-50"/>
+                <hr class="hr-2"/>
+                <div class="text-center mt-3">
+                    <h4 class="text-info text-center"><a th:href="@{/admin/items/details(id=${editItemBindingModel.id})}">Go to Item Details</a></h4>
+                    <h4 class="text-info text-center"><a th:href="@{/admin/items/all}">Back to All Items</a></h4>
+                    <h4 class="text-info text-center"><a th:href="@{/home}">Go to Home Page</a></h4>
+                </div> 
+            </main>
+
+            <!--CONTENT ENDING-->
+            <hr class="hr-2"/>
+            <th:block th:replace="fragments/scripts-block"></th:block>
+            <th:block th:replace="fragments/footer-block"></th:block>
+        </div>
+    </body>
+</html>

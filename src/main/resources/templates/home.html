@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <th:block th:replace="fragments/head-block"></th:block>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <th:block th:replace="fragments/navbar-block"></th:block>
+        <th:block th:replace="fragments/error-block"></th:block>
+        <div th:insert="fragments/csrf-block.html"/>
+
+
+        <th:block sec:authorize="isAnonymous()">
+            <header>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <!-- Slide One - Set the background image for this slide in the line below -->
+                        <div class="carousel-item active" th:style="|background-image:  url('| + @{~/images/home/image1.jpg}+ |')|">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Buy awesome and cheap tech</h3>
+                                <p>Buy powerful tech for bargain price.</p>
+                            </div>
+                        </div>
+                        <!-- Slide Two - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" th:style="|background-image:  url('| + @{~/images/home/image2.jpg}+ |')|">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Equip your small business</h3>
+                                <p>Get everything for your small business.</p>
+                            </div>
+                        </div>
+                        <!-- Slide Three - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" th:style="|background-image:  url('| + @{~/images/home/image3.jpg}+ |')|">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Equip your home office</h3>
+                                <p>Get everything for home office.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </header>
+        </th:block>
+
+        <!-- Page Content -->
+        <div class="container">
+            <!-- Marketing Icons Section -->
+            <th:block sec:authorize="isAnonymous()">
+                <h1 class="my-4">Welcome to Atia & Tiger Technology Shop</h1>
+                <!-- Features Section -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2>Atia & Tiger Technology Shop Features</h2>
+                        <p>In Atia & Tiger Technology Shop you can:</p>
+                        <ul>
+                            <li>
+                                Buy company assets at <strong>bargain price</strong> by secret bidding 
+                            </li>
+                            <li>Turn your items to cash by selling them to the highest bidder and get extra money for your new goals</li>
+                            <li>Get that much needed equipment for starting your own business</li>
+                        </ul>
+                        <p>In order to use this site You must first <a th:href="@{users/register}">Register</a> with your @atia.com domain email, or if You already have registration please <a th:href="@{/login}">Log in</a>.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <img class="img-fluid rounded" th:src="@{/images/home/money.jpg}" alt="">
+                    </div>
+                </div>
+
+                <hr/>
+
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <p>If you <strong>have</strong> Registration in our site please Log in</p>
+                    </div>
+                    <div class="col-md-4">
+                        <a class="btn btn-lg btn-primary btn-block" th:href="@{/login}">Log in</a>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <p>If you <strong>DON'T have</strong> Registration in our site please first Register</p>
+                    </div>
+                    <div class="col-md-4">
+                        <a class="btn btn-lg btn-primary btn-block" th:href="@{users/register}">Register</a>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </th:block>
+
+
+            <th:block sec:authorize="isAuthenticated()">
+                <h1 class="my-4" th:text="'Welcome, '+${#session.getAttribute('userFullName')}"/>
+
+                <th:block sec:authorize="hasAuthority('SELLER')">
+                    <hr class="hr-2"/>
+                    <div class = "container-fluid my-heading-container rounded">
+                        <h2>Seller Panel</h2>
+                    </div>
+                    <hr class="hr-2"/>
+                    <div class="row">
+                        <div class="col-lg-6 portfolio-item">
+                            <div class="card h-100">
+                                <a th:href = "@{/seller/items/create}"><img class="card-img-top" th:src="@{/images/home/items.jpg}" alt="Create Item"></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a th:href = "@{/seller/items/create}">Create Item</a>
+                                    </h4>
+                                    <p class="card-text">Create item with specification and some photos</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 portfolio-item">
+                            <div class="card h-100">
+                                <a th:href = "@{/seller/auctions/create}"><img class="card-img-top" th:src="@{/images/home/auction.jpg}" alt="Create Auction"></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a th:href = "@{/seller/auctions/create}">Create Auction</a>
+                                    </h4>
+                                    <p class="card-text">Create auction with already created items and place asking price <strong>(optional)</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <hr/>
+
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h4>Show and edit all my created items</h4>
+                            <p>Created items can be add to auctions.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-lg btn-primary btn-block" th:href = "@{/seller/items/all}">My Items</a>
+                        </div>
+                    </div>
+                    <hr/>
+
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h4>Show and edit all my created auctions</h4>
+                            <p>Auction can be edited before it's expiration date and time.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-lg btn-primary btn-block" th:href = "@{/seller/auctions/all}">My auctions</a>
+                        </div>
+                    </div>
+                </th:block>
+
+                <th:block sec:authorize="hasAuthority('BUYER')">
+                    <hr class ="hr-2"/>
+                    <div class = "container-fluid my-heading-container rounded">
+                        <h2>Buyer Panel</h2>
+                    </div>
+                    <hr class ="hr-2"/>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a th:href = "@{/buyer/auctions/all}">
+                                <img class="img-fluid rounded mb-3 mb-md-0" th:src="@{/images/home/active_auctions.jpg}" alt="View active auctions">
+                            </a>
+                        </div>
+                        <div class="col-md-5">
+                            <h3>Show all active auctions</h3>
+                            <p>You can place bids on any auction till it expires. After auction expired date and time system sends notification to seller and auction winner by provided emails. Auction winner is determined by choose auction strategy.</p>
+                            <a class="btn btn-lg btn-primary btn-block" th:href = "@{/buyer/auctions/all}">
+                                Show All Active Auctions
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <hr>
+                        <hr/>
+                        <div class="row mb-4">
+                            <div class="col-md-8">
+                                <h4>Show wined auctions by me</h4>
+                                <p>Here You can view all wined auctions by You.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-lg btn-primary btn-block" th:href = "@{/buyer/winning/auctions}">Wined auctions</a>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row mb-4">
+                            <div class="col-md-8">
+                                <h4>Show all my placed bids</h4>
+                                <p>Here You can view all Your bids.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-lg btn-primary btn-block" th:href = "@{/buyer/bids/all}">Placed bids</a>
+                            </div>
+                        </div>
+                </th:block>
+
+                <th:block sec:authorize="hasAuthority('ADMIN')">
+                    <hr class="hr-2"/>
+                    <div class = "container-fluid my-heading-container rounded">
+                        <h2>Admin Panel</h2>
+                    </div>
+                    <hr class="hr-2"/>
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h4>Show all Auctions</h4>
+                            <p>Here You can view all registered auctions and the user who registered them.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-lg btn-primary btn-block" th:href = "@{/admin/auctions/all}">Show all Auctions</a>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h4>Show all users</h4>
+                            <p>Here You can promote user as seller or You can ban (deactivate) user.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-lg btn-primary btn-block" th:href = "@{/admin/users/all}">Show all Users</a>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h4>Show all items</h4>
+                            <p>Here You can view all registered items and user who registered them.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-lg btn-primary btn-block" th:href = "@{/admin/items/all}">Show all Items</a>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h4>Show all placed bids</h4>
+                            <p>Here You can view all placed bids and the user who place them.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-lg btn-primary btn-block" th:href = "@{/admin/bids/all}">Show all Bids</a>
+                        </div>
+                    </div>
+                    <hr/>
+                </th:block>
+
+            </th:block>
+
+
+
+        </div>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <th:block th:replace="fragments/footer-block"></th:block>
+
+        <!-- Bootstrap core JavaScript -->
+        <th:block th:replace="fragments/scripts-block"></th:block>
+
+    </body>
+
+</html>

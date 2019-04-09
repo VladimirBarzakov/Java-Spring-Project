@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"/>
+<th:block th:fragment="head-block">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="ATIA & TIGER TECHNOLOGY SHOP">
+        <meta name="author" content="Vladimir Barzakov">
+        <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+        
+        <title>Atia & Tiger Tech Shop</title>
+    
+        <!-- Bootstrap core CSS -->
+        <link th:href="@{/css/bootstrap.min.css}" type = "text/css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link th:href="@{/css/modern-business.css}" type = "text/css" rel="stylesheet">   
+</th:block>

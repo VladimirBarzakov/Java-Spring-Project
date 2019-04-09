@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+Atia & Tiger Technology 2019.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <th:block th:replace="fragments/head-block"></th:block>
+        <th:block th:replace="fragments/head-admin-block"></th:block>
+    </head>
+
+    <body id="page-top">
+        <th:block th:replace="fragments/navbar-block"></th:block>
+
+
+        <div id="wrapper">
+
+            <div id="content-wrapper">
+
+                <div class="container-fluid">
+                    <hr class="hr-2 w-50"/>
+                    <div class = "container-fluid my-heading-container rounded mx-auto w-50">
+                        <h1>Admin View - All Users</h1>
+                    </div>
+                    <hr class="hr-2 w-50"/>
+                    <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            All Users
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Domain Email</th>
+                                            <th>Authorities</th>
+                                            <th>Details</th>
+                                            <th>Edit Authorities</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Domain Email</th>
+                                            <th>Authorities</th>
+                                            <th>Details</th>
+                                            <th>Edit Authorities</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <th:block th:each="user : ${usersList}">
+                                            <tr>
+                                                <td th:text="${user.name}"/>
+                                                <td th:text="${user.domainEmail}"/>
+                                                <td th:text="${user.authorities}"/>
+                                                <td><a class="btn btn-primary" th:href="@{/admin/users/details(id=${user.id})}">Details</a></td>
+                                                <td><a th:if="${user.domainEmail} != ${#authentication.principal.username} and !${#strings.contains({user.authorities},'ROOT')}" class="btn btn-warning" th:href="@{/admin/users/edit(id=${user.id})}">Edit Authorities</a></td>
+                                            </tr>
+                                        </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <h4 class="text-info text-center"><a th:href="@{/home}">Go to Home Page</a></h4>
+                    </div> 
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- Bootstrap core JavaScript-->
+        <th:block th:replace="fragments/footer-block"></th:block>
+        <th:block th:replace="fragments/scripts-block"></th:block>
+        <th:block th:replace="fragments/scripts-admin-block"></th:block>
+        <script>
+            $(document).ready(function () {
+                $('#dataTable').DataTable();
+            });
+        </script>
+    </body>
+</html>
+
+
+
+

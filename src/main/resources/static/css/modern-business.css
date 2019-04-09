@@ -1,0 +1,82 @@
+/*!
+ * Start Bootstrap - Modern Business (https://startbootstrap.com/template-overviews/modern-business)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-logomodern-business-nav/blob/master/LICENSE)
+ */
+body {
+  padding-top: 56px;
+  background-color: #F5F5F5;
+}
+
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.my-heading-container{
+    background-color: #FF8C00;
+    min-height: 60px;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center;
+}
+
+.my-secondary-heading-container{
+    background-color: #87CEFA;
+    min-height: 60px;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center;
+}
+
+.hr-2 {
+    border: none;
+    height: 2px;
+    color: #696969;
+    background-color: #696969; /* Modern Browsers */
+}
+
+#notifications {
+    float: right;
+    position: fixed;
+    top: 50px;
+    right: 0;
+    text-align: center;
+    margin: 1em;
+}
+
+.notification {
+    font-size: 1.5em;
+    color: #000000;
+    display: none;
+    text-align: right;
+}
+
+.notification>span {
+    display: inline-block;
+    padding:  0.5em 2em 0.5em 2em;
+    border-radius: 10px;
+}
+
+#loadingBox>span {
+    background: #FFD700;
+}
+
+#infoBox>span {
+    background: #00FFFF;
+}
+
+#errorBox>span {
+    background: #FF0000;
+}
+
+

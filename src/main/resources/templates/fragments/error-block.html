@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"/>
+<th:block th:fragment="error-block">
+    <div class="p-3 mb-2 text-danger">
+        <h3 th:if="${errormessage != null}" th:text="${errormessage}"></h3>
+    </div>
+</th:block>

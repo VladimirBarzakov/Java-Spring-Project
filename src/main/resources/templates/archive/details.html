@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+Atia & Tiger Technology 2019.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"/>
+<head>
+    <th:block th:replace="fragments/head-block"></th:block>
+    <th:block th:replace="fragments/head-admin-block"></th:block>
+    <th:block th:replace="fragments/head-gallery-block"></th:block>
+</head>
+<body>
+    <div class="container-fluid">
+        <th:block th:replace="fragments/navbar-block"></th:block>
+        <th:block th:replace="fragments/error-block"></th:block>
+
+
+        <main class="mt-3">
+            <hr class="hr-2 w-75"/>
+            <div class = "container-fluid my-heading-container rounded mx-auto w-75">
+                <h1>Archive Auction Details</h1>
+            </div>
+            <hr class="hr-2 w-75"/>
+            <div class="mx-auto w-75" th:object="${detailsAuctionViewModel}">
+                <div class="control-group">
+                    <label class="control-label h3 mb-2" for="auctionTitle">Auction Title</label>
+                    <div class="controls">
+                        <p th:text="*{title}" name="auctionTitle" class="form-control"/>
+                    </div>
+                </div>
+
+                <br/>
+                <div class="control-group">
+                    <label class="control-label h3 mb-2" for="auctionDescription">Auction Description</label>
+                    <div class="controls">
+                        <textarea th:field="*{description}" name="auctionDescription" placeholder="Auction Description..." 
+                                  class="form-control" style="resize: true;" cols="50" rows="15" disabled="true"></textarea>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="w-50 p-3">
+                        <label class="control-label h3 mb-2" for="auctionStartDate">Auction Start Date</label>
+                        <div class="controls">
+                            <p th:text="*{#dates.format(dateStarted, 'dd/MM/yyyy-HH:mm')}" name="auctionStartDate" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="w-50 p-3">
+                        <label class="control-label h3 mb-2" for="auctionExpiredDate">Auction Expired Date</label>
+                        <div class="controls">
+                            <p th:text="*{#dates.format(dateExpired, 'dd/MM/yyyy-HH:mm')}" name="auctionStartDate" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="control-group w-50 mx-auto">
+                    <label class="control-label h3 mb-2" for="auctionStatus">Auction Status</label>
+                    <div class="controls">
+                        <p th:text="*{status}" name="auctionStatus" class="form-control"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="control-group w-50 mx-auto">
+                    <label class="control-label h3 mb-2" for="auctionSeller">Created by</label>
+                    <div class="controls">
+                        <a th:href="@{/admin/users/details(id=*{sellerId})}"><p th:text="*{sellerName}" name="auctionSeller" class="form-control"/></a>
+                    </div>
+                </div>
+                <br/>
+                <div th:if="*{auctionWinnerId}!=null" class="control-group w-50 mx-auto">
+                    <label class="control-label h3 mb-2" for="auctionWinner">Auction Winner</label>
+                    <div class="controls">
+                        <a th:href="@{/admin/users/details(id=*{auctionWinnerId})}" th:text="*{auctionWinnerName}" name="auctionWinner" class="form-control"></a>
+                    </div>
+                </div>
+                <br/>
+                <div class="control-group w-50 mx-auto">
+                    <label class="control-label h3 mb-2" for="ititialPrice">Asking Auction Price BGN</label>
+                    <div class="controls">
+                        <p th:text="*{initialPrice} == null ? 'No initial price' : *{initialPrice}" name="ititialPrice" class="form-control" />
+                    </div>
+                </div>
+                <br/>
+                <div class="control-group w-50 mx-auto">
+                    <p class="control-label h3 mb-2">Price of All Items in Auction</p>
+                    <div class="controls">
+                        <p th:text="*{allItemsPrice}" class="form-control" />
+                    </div>
+                </div>
+                <br/>
+                <div class="control-group w-50 mx-auto">
+                    <p class="control-label h3 mb-2">Best bid amount</p>
+                    <div class="controls">
+                        <p th:text="*{bestBidAmount}==null ? 'There is no place bid' : *{bestBidAmount}" class="form-control"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="control-group w-75 mx-auto">
+                    <p class="control-label h3 mb-2">Auction Strategy</p>
+                    <div class="controls">
+                        <p th:text="*{auctionStrategy.strategy}+' -> '+ *{auctionStrategy.description}" class="form-control"/>
+                    </div>
+                </div>
+                <br/>
+                <div th:if="*{auctionWinner} != null" class="control-group w-50 mx-auto" >
+                    <p class="control-label h3 mb-2 rounded" style="background-color: #FF8C00">Auction winner</p>
+                    <div class="controls">
+                        <p th:text="*{auctionWinner.name}" class="form-control"/>
+                    </div>
+                </div>
+                <br/>
+                <div th:if="*{auctionWinner} != null" class="control-group w-50 mx-auto ">
+                    <p class="control-label h3 mb-2 rounded" style="background-color: #FF8C00">Auction final price</p>
+                    <div class="controls">
+                        <p th:text="*{winPrice}" class="form-control"/>
+                    </div>
+                </div>
+                <br/>
+                <hr class="hr-2 w-75"/>
+                <div class = "container-fluid my-secondary-heading-container rounded mx-auto w-75">
+                    <h2>Auction's Pictures</h2>
+                </div>
+                <hr class="hr-2 w-75"/>
+                <section class="gallery-block compact-gallery">
+                    <div class="container">
+                        <div class="row no-gutters">
+                            <th:block th:each="aucItemPicture : ${detailsAuctionViewModel.aucItemPictures}">
+                                <div class="col-md-6 col-lg-4 item zoom-on-hover">
+                                    <a class="lightbox" th:href="@{${aucItemPicture.getPicturePath()}}">
+                                        <img class="img-fluid image" th:src="@{${aucItemPicture.getPicturePath()}}"/>
+                                        <span class="description">
+                                            <span class="description-heading" th:text="${aucItemPicture.auctionedItemName}" />
+                                            <span class="description-body" th:text="${aucItemPicture.description}"/>
+                                        </span>
+                                    </a>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="hr-2 w-75"/>
+                <div class = "container-fluid my-secondary-heading-container rounded mx-auto w-75">
+                    <h2>Auction Items</h2>
+                </div>
+                <hr class="hr-2 w-75"/>
+                <!-- DataTables Example -->
+                <div class="card mx-auto w-100 justify-content-md-center">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i>
+                        Auction Items
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="auctionedItems" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Asking Price BGN</th>
+                                        <th>Location</th>
+                                        <th>Original Item</th>
+                                        <th>Auctioned Item details<th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Asking Price BGN</th>
+                                        <th>Location</th>
+                                        <th>Original Item</th>
+                                        <th>Auctioned Item details<th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <th:block th:each="auctionedItem : *{auctionedItems}">
+                                        <tr>
+                                            <td><p th:text="${auctionedItem.itemName}" /></td>
+                                            <td><p th:text="${auctionedItem.quantity}" /></td>
+                                            <td><p th:text="${auctionedItem.itemPrice} == null ? 'No registered price' : ${auctionedItem.itemPrice}" /></td>
+                                            <td><p th:text="${auctionedItem.itemLocation}" /></td>
+                                            <td><a class="btn btn-primary" th:if="${auctionedItem.parentId}!=null" th:href="@{/admin/items/details(id=${auctionedItem.parentId})}">Details</a></td>
+                                            <td><a class="btn btn-primary" th:href="@{/admin/auctions/aucitem/details(id=${auctionedItem.id})}">Details</a></td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr-2"/>
+            </div>        
+        </main>
+
+        <div class="text-center mt-3">
+            <h4 sec:authorize="hasAuthority('ADMIN')" class="text-info text-center">
+                <a class="btn btn-danger" th:href="@{/archive//admin/delete/${detailsAuctionViewModel.id}}">
+                    Delete archive 
+                </a>
+            </h4>
+            <h4 sec:authorize="hasAuthority('ADMIN') or hasAuthority('SELLER')" class="text-info text-center"><a th:href="@{/archive/all}">Back to All Archive Auctions</a></h4>
+            <h4 class="text-info text-center"><a th:href="@{/home}">Go to Home Page</a></h4>
+        </div> 
+        <hr class="hr-2"/>
+        <th:block th:replace="fragments/footer-block"></th:block>
+        <th:block th:replace="fragments/scripts-block"></th:block>
+        <th:block th:replace="fragments/scripts-admin-block"></th:block>
+        <th:block th:replace="fragments/scripts-gallery-block"></th:block>
+        <script>
+            $(document).ready(function () {
+                $('#auctionedItems').DataTable();
+            });
+        </script>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"/>
+<th:block th:fragment="ajax-notifications-block">
+    <div id="notifications">
+        <div id="notifications-inner">
+            <div id="loadingBox" class="notification">
+                <span>Loading …</span>
+            </div>
+            <div id="errorBox" class="notification">
+                <span>Something went wrong</span>
+            </div>
+            <div id="infoBox" class="notification">
+                <span>Success</span>
+            </div>
+        </div>
+    </div>
+</th:block>

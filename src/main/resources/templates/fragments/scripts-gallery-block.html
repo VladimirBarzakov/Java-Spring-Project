@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"/>
+<th:block th:fragment="scripts-gallery-block">
+    <!-- Gallery Script-->
+    <script type="text/javascript" th:src="@{/js/gallery/baguetteBox.min.js}"></script>
+    
+    <script>
+        baguetteBox.run('.compact-gallery', { animation: 'slideIn'});
+    </script>
+</th:block>

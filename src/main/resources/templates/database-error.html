@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <th:block th:replace="fragments/head-block"></th:block>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <th:block th:replace="fragments/navbar-block"></th:block>
+        <div th:insert="fragments/csrf-block.html"/>
+
+        <!-- Page Content -->
+        <div class="container">
+            <h1 class="my-4 font-italic text-center">Oops, there was problem with our database and it's a big dragon! A team of highly trained devs has been dispatched to kill the dragon using different languages.</h1>
+            <hr class="w-50"/>
+            <div class="text-center">
+                 <img class="rounded" th:src="@{/images/database-error/dragon.jpg}" alt=""/>
+            </div>
+            <hr class="w-50"/>
+        </div>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <th:block th:replace="fragments/footer-block"></th:block>
+
+        <!-- Bootstrap core JavaScript -->
+        <th:block th:replace="fragments/scripts-block"></th:block>
+
+    </body>
+
+</html>
