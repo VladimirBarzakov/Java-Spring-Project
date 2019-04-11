@@ -28,6 +28,7 @@ import Atia.Shop.domain.models.DTO.admin.auctions.aucItems.details.AucItemViewMo
 import Atia.Shop.exeptions.base.ReporPartlyToUserException;
 import Atia.Shop.exeptions.base.ReportToUserException;
 import Atia.Shop.service.API.SHOP.AuctionService;
+import Atia.Shop.service.API.SHOP.BidService;
 import Atia.Shop.service.API.SHOP.ItemService;
 import Atia.Shop.utils.mapper.MapperValidatorUtil;
 import java.security.Principal;
@@ -64,6 +65,7 @@ public class AdminAuctionsController extends BaseController{
      
     private final AuctionService auctionService;
     private final ItemService itemService;
+    private final BidService bidService;
     
     private final UserRolesEnum adminRole;
 
@@ -71,10 +73,12 @@ public class AdminAuctionsController extends BaseController{
     public AdminAuctionsController(
             AuctionService auctionService, 
             MapperValidatorUtil mapperValidatorUtil,
-            ItemService itemService) {
+            ItemService itemService,
+            BidService bidService) {
         super(mapperValidatorUtil);
         this.auctionService = auctionService;
         this.itemService = itemService;
+        this.bidService=bidService;
         
         this.adminRole=UserRolesEnum.ADMIN;
     }
@@ -174,6 +178,7 @@ public class AdminAuctionsController extends BaseController{
     public ModelAndView postDeleteForm(@RequestParam("id") Long auctionId, ModelAndView model, Principal principal) {
         AuctionServiceModel auction = this.auctionService.getAuctionById(auctionId, principal.getName(), this.adminRole);
         try {
+            this.bidService.deleteAllBidsOfAuction(auction);
             this.auctionService.deleteAuction(auction, principal.getName(),this.adminRole);
         } catch (Exception ex) {
             throw new ReporPartlyToUserException(ex.getMessage(), ex.getCause());

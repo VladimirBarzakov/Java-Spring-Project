@@ -56,7 +56,7 @@ Atia & Tiger Technology 2019.
                 </div>
                 <br/>
                 <div class="control-group">
-                    <label class="control-label h3 mb-2" for="ititialPrice">Asking Price BGN</label>
+                    <label class="control-label h3 mb-2 rounded" style="background-color: #FF8C00" for="ititialPrice">Asking Price BGN</label>
                     <div class="controls">
                         <input type="number" step="0.01" th:field="*{initialPrice}" name="ititialPrice" placeholder="Initial Price (optional)" class="form-control">
                             <p class="text-danger" th:if="${#fields.hasErrors('initialPrice')}" th:errors="*{initialPrice}"/>
@@ -74,7 +74,7 @@ Atia & Tiger Technology 2019.
                 </div>
                 <br/>
                 <div class="control-group">
-                    <p class="control-label h3 mb-2">Price of All Items in Auction</p>
+                    <p class="control-label h3 mb-2">Price of All Items in Auction BGN</p>
                     <div class="controls">
                         <input type="number" step="0.01" th:field="*{allItemsPrice}" class="form-control" readonly="true"/>
                     </div>

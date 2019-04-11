@@ -22,6 +22,7 @@ import Atia.Shop.exeptions.base.ReporPartlyToUserException;
 import Atia.Shop.exeptions.base.ReportToUserException;
 import Atia.Shop.service.API.Pictures.AuctionPictureService;
 import Atia.Shop.service.API.SHOP.AuctionService;
+import Atia.Shop.service.API.SHOP.BidService;
 import Atia.Shop.service.API.SHOP.ItemService;
 import Atia.Shop.service.API.Users.UserService;
 import Atia.Shop.utils.valdiation.InputValidator;
@@ -111,8 +112,13 @@ public class AuctionServiceImplTest {
         this.auctionPictureService = Mockito.mock(AuctionPictureService.class);
         this.itemService = Mockito.mock(ItemService.class);
         this.userService = Mockito.mock(UserService.class);
-        this.auctionService=new AuctionServiceImpl(this.modelMapper, this.userService, this.itemService,
-                this.auctionRepository, this.auctionPictureService, this.inputValidator);
+        this.auctionService=new AuctionServiceImpl(
+                this.modelMapper,
+                this.userService, 
+                this.itemService,
+                this.auctionRepository,
+                this.auctionPictureService,
+                this.inputValidator);
         
         this.user_A = this.initUser();
         this.user_A.setDomainEmail(this.USER_A_EMAIL);

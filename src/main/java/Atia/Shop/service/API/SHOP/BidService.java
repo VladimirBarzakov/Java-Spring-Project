@@ -3,6 +3,7 @@
  */
 package Atia.Shop.service.API.SHOP;
 
+import Atia.Shop.domain.models.serviceModels.AuctionServiceModel;
 import Atia.Shop.domain.models.serviceModels.BidServiceModel;
 import Atia.Shop.exeptions.base.ReportToUserException;
 import java.util.List;
@@ -20,5 +21,11 @@ public interface BidService {
     List<BidServiceModel> getALLByBidderMail(String bidderMail);
     
     List<BidServiceModel> adminGetALL();
+    
+    boolean deleteSingleBid(Long bidId);
+    
+    boolean deleteAllBidsOfAuction(AuctionServiceModel auction);
+    
+    boolean deleteAllBidsOfArchiveAuction(AuctionServiceModel auction);
     
 }

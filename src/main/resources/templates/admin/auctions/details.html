@@ -74,23 +74,23 @@ Atia & Tiger Technology 2019.
                 </div>
                 <br/>
                 <div class="control-group w-50 mx-auto">
-                    <label class="control-label h3 mb-2" for="ititialPrice">Asking Price BGN</label>
+                    <label class="control-label h3 mb-2 rounded" style="background-color: #FF8C00" for="ititialPrice">Asking Price BGN</label>
                     <div class="controls">
                         <p th:text="*{initialPrice} == null ? 'No initial price' : *{initialPrice}" name="ititialPrice" class="form-control" />
                     </div>
                 </div>
                 <br/>
                 <div class="control-group w-50 mx-auto">
-                    <p class="control-label h3 mb-2">Price of All Items in Auction</p>
+                    <p class="control-label h3 mb-2">Price of All Items in Auction BGN</p>
                     <div class="controls">
                         <p th:text="*{allItemsPrice}" class="form-control" />
                     </div>
                 </div>
                 <br/>
                 <div class="control-group w-50 mx-auto">
-                    <p class="control-label h3 mb-2">Best bid amount</p>
+                    <label class="control-label h3 mb-2 rounded" style="background-color: #FF8C00">Best bid amount BGN</label>
                     <div class="controls">
-                        <p th:text="*{bestBidAmount}==null ? 'There is no place bid' : *{bestBidAmount}" class="form-control"/>
+                        <p th:text="*{bestBidAmount}==null ? 'There is no placed bid' : *{bestBidAmount}" class="form-control"/>
                     </div>
                 </div>
                 <br/>
@@ -138,7 +138,7 @@ Atia & Tiger Technology 2019.
                                         <th>Asking Price BGN</th>
                                         <th>Location</th>
                                         <th>Original Item</th>
-                                        <th>Auctioned Item details<th>
+                                        <th>Auctioned Item details</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -148,7 +148,7 @@ Atia & Tiger Technology 2019.
                                         <th>Asking Price BGN</th>
                                         <th>Location</th>
                                         <th>Original Item</th>
-                                        <th>Auctioned Item details<th>
+                                        <th>Auctioned Item details</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>

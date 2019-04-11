@@ -283,9 +283,7 @@ public class AuctionServiceImpl implements AuctionService {
             this.auctionRepository.save(this.modelMapper.map(auctionToDelete, Auction.class));
         }
         this.auctionPictureService.deleteAllPicturesFromAuction(auctionToDelete);
-        if (auctionToDelete.getStatus().compareTo(AuctionStatus.SELLED) != 0) {
-            this.itemService.removeAllFromAuction(aucItems, true);
-        }
+        this.itemService.removeAllFromAuction(aucItems, true);
         this.auctionRepository.deleteById(auctionToDelete.getId());
 
         return true;
@@ -494,7 +492,7 @@ public class AuctionServiceImpl implements AuctionService {
             AucItemPictureWrapperServiceModel wrapper = this.auctionPictureService.getPictureWrapperById(pictureWrapper.getId());
             if (auction.getThumbnail() != null && auction.getThumbnail().getId() == wrapper.getAuctionPicture().getId().longValue()) {
                 auction.setThumbnail(null);
-                this.auctionRepository.save(this.modelMapper.map(auction, Auction.class));
+                this.auctionRepository.saveAndFlush(this.modelMapper.map(auction, Auction.class));
             }
         }
         return this.auctionPictureService.deletePicture(pictureWrapper, sellerMail);
@@ -512,7 +510,7 @@ public class AuctionServiceImpl implements AuctionService {
             AucItemPictureWrapperServiceModel wrapper = this.auctionPictureService.getPictureWrapperById(pictureWrapper.getId());
             if (auction.getThumbnail() != null && auction.getThumbnail().getId() == wrapper.getAuctionPicture().getId().longValue()) {
                 auction.setThumbnail(null);
-                this.auctionRepository.save(this.modelMapper.map(auction, Auction.class));
+                this.auctionRepository.saveAndFlush(this.modelMapper.map(auction, Auction.class));
             }
         }
         return this.auctionPictureService.adminDeletePicture(pictureWrapper);
@@ -647,6 +645,13 @@ public class AuctionServiceImpl implements AuctionService {
             throw new InvalidRoleException(SystemExceptionMessage.NOT_SUPPORTED_USER_ROLE + role.getRole());
         }
         Auction auction = this.getArchiveAuctionEntityById(id);
+        
+        if(auction.getBestBid()!=null){
+            // If archive has best bid, it should be deleted first
+            auction.setBestBid(null);
+            this.auctionRepository.saveAndFlush(auction);
+            return false;
+        }
         return this.deleteAuction(this.modelMapper.map(auction, AuctionServiceModel.class));
     }
 

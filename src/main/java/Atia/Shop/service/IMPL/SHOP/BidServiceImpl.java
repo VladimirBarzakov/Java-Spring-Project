@@ -21,6 +21,7 @@ import Atia.Shop.service.IMPL.WinStrategyImpl.OpenBiddingHighestBid;
 import Atia.Shop.service.IMPL.WinStrategyImpl.SecretBiddingFirstBid;
 import Atia.Shop.service.IMPL.WinStrategyImpl.SecretBiddingSecondBid;
 import Atia.Shop.utils.valdiation.InputValidator;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -124,6 +125,49 @@ public class BidServiceImpl implements BidService {
                 .stream()
                 .map(x -> this.modelMapper.map(x, BidServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean deleteSingleBid(Long bidId) {
+        Bid bid = this.bidRepository.findById(bidId).orElse(null);
+        if(bid == null){
+            throw new ReporPartlyToUserException(SystemExceptionMessage.BID_INVALID_ID);
+        }
+        if(bid.getAuction().getBestBid()!=null && bid.getAuction().getBestBid().getId()==bid.getId()){
+            try {
+                Auction auction = bid.getAuction();
+                auction.setBestBid(null);
+                this.auctionService.updateAuction(this.modelMapper.map(auction, AuctionServiceModel.class),
+                        new ArrayList(),
+                        new ArrayList());
+            } catch (ReportToUserException ex) {
+                 throw new IllegalArgumentException(ex);
+            }
+        }
+        this.bidRepository.delete(bid);
+        return true;
+    }
+
+    @Override
+    public boolean deleteAllBidsOfAuction(AuctionServiceModel auction) {
+        if(auction.getBestBid()!=null){
+            try {
+                auction.setBestBid(null);
+                this.auctionService.updateAuction(auction, new ArrayList(), new ArrayList());
+            } catch (ReportToUserException ex) {
+                 throw new IllegalArgumentException(ex);
+            }
+        }
+        List<Bid> allBids = this.bidRepository.getAllByAuction(this.modelMapper.map(auction, Auction.class));
+        this.bidRepository.deleteAll(allBids);
+        return true;
+    }
+
+    @Override
+    public boolean deleteAllBidsOfArchiveAuction(AuctionServiceModel auction) {
+        List<Bid> allBids = this.bidRepository.getAllByAuction(this.modelMapper.map(auction, Auction.class));
+        this.bidRepository.deleteAll(allBids);
+        return true;
     }
 
 }

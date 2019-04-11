@@ -46,4 +46,6 @@ public class SystemExceptionMessage {
     public static final String ITEM_IS_NOT_DELETABLE = "Not deletable item with ID ";
     
     public static final String BID_INVALID_AUCTION_STATUS = "Invalid auction status";
+    
+    public static final String BID_INVALID_ID = "There is no bid with that ID";
 }

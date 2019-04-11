@@ -94,9 +94,9 @@ Atia & Tiger Technology 2019.
                                 <tbody>
                                     <th:block th:each="auctionedItem, rowStat : *{auctionedItems}">
                                         <tr>
-                                            <td><p class="h6"  th:text="*{auctionedItems[__${rowStat.index}__].itemName}" /></td>
-                                            <td><p class="h6" th:text="*{auctionedItems[__${rowStat.index}__].quantity}" /></td>
-                                            <td><p class="h6" th:text="*{auctionedItems[__${rowStat.index}__].itemPrice} == null ? 'No registered price' : *{auctionedItems[__${rowStat.index}__].itemPrice}" /></td>
+                                            <td><p th:text="*{auctionedItems[__${rowStat.index}__].itemName}" /></td>
+                                            <td><p th:text="*{auctionedItems[__${rowStat.index}__].quantity}" /></td>
+                                            <td><p th:text="*{auctionedItems[__${rowStat.index}__].itemPrice} == null ? 'No registered price' : *{auctionedItems[__${rowStat.index}__].itemPrice}" /></td>
                                         </tr>
                                     </th:block>
                                 </tbody>

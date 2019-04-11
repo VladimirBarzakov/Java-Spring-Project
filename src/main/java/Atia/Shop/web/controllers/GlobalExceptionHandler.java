@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({ReporPartlyToUserException.class})
     public ModelAndView handleShowableException(Exception ex, Principal principal, HttpServletRequest request) {
         ModelAndView model = new ModelAndView(ERROR_PAGE_VIEW_ADRESS);
-        LOGGER.warn(String.format(PARTLY_ERROR_FORMAT, principal.getName(), ex.getMessage(), this.getFullURL(request)));
+        LOGGER.warn(String.format(PARTLY_ERROR_FORMAT, principal.getName(), ex.getMessage(), this.getFullURL(request)),ex);
         model.addObject(ValidationMesseges.ATTRIBUTE_NAME_FOR_ERROR_MESSAGE, ex.getMessage());
         return model;
     }

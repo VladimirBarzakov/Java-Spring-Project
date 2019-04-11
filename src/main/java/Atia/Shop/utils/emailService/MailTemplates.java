@@ -41,13 +41,17 @@ public enum MailTemplates {
 "        </style>\n" +
 "    </head>\n" +
 "    <body>\n" +
+         "<div style=\"background-color: #000000;  height: 50px; width: 40%; border-radius: 25px;\">\n" +
+"            <h2 style=\"color:#FF8C00; text-align: center; padding-top: 10px; \">ATIA & Tiger Technology Shop</h2>\n" +
+"        </div>\n" +
+"        <br/>\n" + 
 "        <h2>Congratulations, your have sold Your Auction!</h2>\n" +
 "        <div>\n" +
 "            <p>Your auction with name <b>\"${auctionName}\"</b> have been sold!</p>\n" +
 "            <p>Auction winner is <b>${winnerName}</b> - <b>${winnerMail}</b> for the price of <b>${auctionprice} BGN</b>!</p>\n" +
 "            <p>Please contact <b>${winnerName}</b> to arrange your payment and dellivery of winned goods!</p>\n" +
 "            <p>Have a nice day and use our Shop again :)!</p>\n" +
-"            <p><i>ATIA & Tiger Technology</i></p>\n" +
+"            <p><i>ATIA & Tiger Technology Team</i></p>\n" +
 "        </div>\n" +
 "    </body>\n" +
 "</html>";
@@ -70,13 +74,17 @@ public enum MailTemplates {
 "        </style>\n" +
 "    </head>\n" +
 "    <body>\n" +
+"        <div style=\"background-color: #000000;  height: 50px; width: 40%; border-radius: 25px;\">\n" +
+"            <h2 style=\"color:#FF8C00; text-align: center; padding-top: 10px; \">ATIA & Tiger Technology Shop</h2>\n" +
+"        </div>\n" +
+"        <br/>\n" + 
 "        <h2>Congratulations, your have win auction - \"${auctionName}\"!</h2>\n" +
 "        <div>\n" +
 "            <p>Your have win auction with name <b>\"${auctionName}\"</b></p>\n" +
 "            <p>Auction seller is <b>${sellerName}</b> - <b>${sellerMail}</b> and auction final price is <b>${auctionprice} BGN</b>!</p>\n" +
 "            <p>Please contact <b>${sellerName}</b> to arrange payment and dellivery of winned goods!</p>\n" +
 "            <p>Have a nice day and use our Shop again :)!</p>\n" +
-"            <p><i>ATIA & Tiger Technology</i></p>\n" +
+"            <p><i>ATIA & Tiger Technology Team</i></p>\n" +
 "        </div>\n" +
 "    </body>\n" +
 "</html>";

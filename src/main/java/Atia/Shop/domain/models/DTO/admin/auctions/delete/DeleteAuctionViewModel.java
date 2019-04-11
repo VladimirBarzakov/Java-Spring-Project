@@ -23,10 +23,10 @@ public class DeleteAuctionViewModel extends BasePresenter{
 
     private String description;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy-HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dateStarted;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy-HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dateExpired;
 
     private BigDecimal initialPrice;

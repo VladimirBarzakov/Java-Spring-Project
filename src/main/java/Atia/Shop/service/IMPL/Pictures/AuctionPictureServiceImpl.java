@@ -93,7 +93,7 @@ public class AuctionPictureServiceImpl implements AuctionPictureService{
         aucItemPicWrapper.setOriginalFileName(itemPictureFileName);
         aucItemPicWrapper.setDescription(pictureWrapper.getDescription());
         aucItemPicWrapper.setAuctionedItemName(pictureWrapper.getAuctionedItemName());
-        aucItemPicWrapper=this.aucItemPictureRepository.save(aucItemPicWrapper);
+        aucItemPicWrapper=this.aucItemPictureRepository.saveAndFlush(aucItemPicWrapper);
 
         return this.modelMapper.map(aucItemPicWrapper, AucItemPictureWrapperServiceModel.class);
     }
@@ -118,7 +118,7 @@ public class AuctionPictureServiceImpl implements AuctionPictureService{
             this.auctionPictureRepository.delete(auctionPicture);
             this.auctionPictureStorage.deleteSingle(auctionPicture.getPictureFileID());
         }else{
-            this.auctionPictureRepository.save(auctionPicture);
+            this.auctionPictureRepository.saveAndFlush(auctionPicture);
         }
         return true; 
     }

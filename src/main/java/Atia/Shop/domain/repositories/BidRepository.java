@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BidRepository extends JpaRepository<Bid, Long> {
     
-    List<Bid> getAllByAuction(Auction auctionId);
+    List<Bid> getAllByAuction(Auction auction);
     
     List<Bid> getAllByBidder(User bidder);
 }

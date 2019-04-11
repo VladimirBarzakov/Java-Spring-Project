@@ -268,7 +268,7 @@ public class ItemServiceImpl implements ItemService {
                 changedItems.add(item);
             }
             if (deleteAucItemsFlag || auctionedItem.getAuction().getStatus().compareTo(AuctionStatus.LIVE) != 0) {
-                //Keep quantity for auctioned items that belogn to auction witch is becomming "SELLED" or "Expired" for archive purpose
+                //Keep quantity for auctioned items that belogn to auction witch is becomming "SELLED" or "EXPIRED" for archive purpose
                 auctionedItem.setQuantity(auctionedItem.getQuantity() - aucItemToremove.getQuantity());
             }
             if (auctionedItem.getQuantity() < 0) {
@@ -276,7 +276,7 @@ public class ItemServiceImpl implements ItemService {
             }
             if (auctionedItem.getAuction().getStatus().compareTo(AuctionStatus.LIVE) == 0 && !deleteAucItemsFlag) {
                 //Auctined items shoud not be removed when updating from "LIVE" to "EXPIRED"
-            } else if (auctionedItem.getQuantity() == 0) {
+            } else if (auctionedItem.getQuantity() == 0 || deleteAucItemsFlag) {
                 aucItemsToRemove.add(auctionedItem);
             } else {
                 aucItemsToChange.add(auctionedItem);

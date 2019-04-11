@@ -9,8 +9,8 @@ package Atia.Shop.config.storage;
  */
 public class StorageVariables {
 
-    public static final String STORAGE_ITEMS_LOCATION = "C:\\Users\\user\\Desktop\\ShopImages\\items";
-    public static final String STORAGE_AUCTIONS_LOCATION = "C:\\Users\\user\\Desktop\\ShopImages\\auctions";
+    public static final String STORAGE_ITEMS_LOCATION = "C:\\Users\\Sauron\\Desktop\\ShopImages\\items";
+    public static final String STORAGE_AUCTIONS_LOCATION = "C:\\Users\\Sauron\\Desktop\\ShopImages\\auctions";
 
     public static final String VALID_PICTURE_FILE_EXTENSIONS = ".jpeg, .jpg, .png, .img";
 
